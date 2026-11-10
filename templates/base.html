@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}SelfCon | Real Estate, Shamelessly Easy{% endblock %}</title>
+<meta name="description" content="Find Comfort. Pay Fair. Live Better. Short-lets, rentals and homes for sale across Lagos.">
+<link rel="icon" href="/static/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{brand:'#155EEF',navy:'#0F1B2D',soft:'#F5F6F8',ok:'#16A34A'},fontFamily:{sans:['Plus Jakarta Sans','Inter','sans-serif']}}}}</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="font-sans text-navy bg-white pb-20 md:pb-0" data-page="{{ page }}" data-user="{{ user or '' }}">
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2.5 shrink-0"><img src="/static/logo.png" alt="SelfCon" class="h-9 w-9"><span class="font-extrabold text-lg tracking-tight">SelfCon</span></a>
+    <nav class="hidden md:flex items-center gap-1 text-sm font-semibold">
+      {% for href,label,key in [('/','Home','home'),('/search','Browse','search'),('/ai-search','AI Search','ai'),('/list-property','List property','list'),('/dashboard','Dashboard','dashboard')] %}
+      <a href="{{ href }}" class="px-3.5 py-2 rounded-xl hover:bg-soft {{ 'text-brand bg-blue-50' if page==key }}">{{ label }}</a>{% endfor %}
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="/favourites" class="relative p-2.5 rounded-xl hover:bg-soft" aria-label="Favourites"><i data-lucide="heart" class="w-5 h-5"></i><span id="fav-count" class="hidden absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-brand text-white text-[11px] font-bold grid place-items-center">0</span></a>
+      {% if user %}<a href="/logout" class="hidden sm:inline-flex btn-ghost">Log out</a>{% else %}<a href="/auth" class="btn-primary">Sign in</a>{% endif %}
+    </div>
+  </div>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer class="bg-navy text-slate-300 mt-24">
+  <div class="max-w-7xl mx-auto px-4 py-14 grid gap-10 md:grid-cols-4">
+    <div class="md:col-span-2"><img src="/static/logo.png" alt="SelfCon" class="h-24 w-24 -ml-2"><p class="mt-3 max-w-sm text-sm">Real Estate, Shamelessly Easy. Short-lets, rentals and homes for sale across Lagos, with fair pricing you can see upfront.</p></div>
+    <div class="text-sm space-y-2.5"><p class="font-bold text-white">Explore</p><a class="block hover:text-white" href="/search?mode=stay">Short-lets</a><a class="block hover:text-white" href="/search?mode=rent">Rentals</a><a class="block hover:text-white" href="/search?mode=buy">Homes for sale</a><a class="block hover:text-white" href="/ai-search">AI search</a></div>
+    <div class="text-sm space-y-2.5"><p class="font-bold text-white">For owners</p><a class="block hover:text-white" href="/list-property">List a property</a><a class="block hover:text-white" href="/dashboard">Dashboard</a><a class="block hover:text-white" href="/auth">Sign in</a><p class="flex items-center gap-2 pt-2"><i data-lucide="phone" class="w-4 h-4"></i>0800 SELFCON</p></div>
+  </div>
+  <div class="border-t border-white/10 py-5 text-center text-xs text-slate-400">© 2026 SelfCon. Find Comfort. Pay Fair. Live Better.</div>
+</footer>
+<nav class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-slate-100 grid grid-cols-5 text-[11px] font-semibold pb-[env(safe-area-inset-bottom)]">
+  {% for href,label,icon,key in [('/','Home','home','home'),('/search','Browse','search','search'),('/ai-search','AI','sparkles','ai'),('/favourites','Saved','heart','favourites'),('/dashboard','Account','user-round','dashboard')] %}
+  <a href="{{ href }}" class="flex flex-col items-center gap-1 py-2.5 {{ 'text-brand' if page==key else 'text-slate-500' }}"><i data-lucide="{{ icon }}" class="w-5 h-5"></i>{{ label }}</a>{% endfor %}
+</nav>
+<div id="toasts" class="fixed top-20 right-4 z-50 space-y-2"></div>
+<script src="/static/main.js"></script>
+</body></html>

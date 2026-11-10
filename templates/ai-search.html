@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}AI Search | SelfCon{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 pt-10">
+  <h1 class="text-3xl font-extrabold flex items-center gap-2"><i data-lucide="sparkles" class="text-brand"></i>SelfCon AI</h1>
+  <p class="text-slate-600 mt-2">Describe your ideal home. Mention area, budget, length of stay and must-haves.</p>
+  <div id="chat" class="mt-6 space-y-4 min-h-[40vh]"></div>
+  <div class="flex flex-wrap gap-2 mt-4 text-xs font-semibold">{% for s in ['Quiet 2-bedroom in Lekki with wifi and gym under ₦2M/year','Short-let in Ikoyi for 5 nights with pool','Buy a fixer-upper in Surulere'] %}<button class="chip" data-suggest="{{ s }}">{{ s }}</button>{% endfor %}</div>
+  <form id="chat-form" class="sticky bottom-20 md:bottom-4 mt-4 bg-white rounded-2xl shadow-soft border border-slate-100 p-2 flex gap-2"><input id="chat-q" class="flex-1 px-3 py-3 outline-none" placeholder="What are you looking for?" autocomplete="off"><button class="btn-primary"><i data-lucide="arrow-right" class="w-4 h-4"></i></button></form>
+</div>
+{% endblock %}

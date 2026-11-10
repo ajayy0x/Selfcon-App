@@ -1,0 +1,26 @@
+{% set side = page == 'search' %}
+<div class="{{ 'lg:grid lg:grid-cols-[290px_1fr] gap-8 items-start' if side }}">
+  <div class="{{ 'bg-soft rounded-2xl p-5 mb-6 lg:mb-0 lg:sticky lg:top-24' if side else 'bg-soft rounded-2xl p-5 mb-6' }}">
+    {% if side %}<p class="font-bold mb-4 flex items-center gap-2"><i data-lucide="filter" class="w-4 h-4"></i>Filters</p>{% endif %}
+    <div class="grid gap-4 {{ '' if side else 'sm:grid-cols-2 lg:grid-cols-4' }}">
+      <label class="lbl">Location<select id="f-loc" class="inp"><option value="">All of Lagos</option>{% for l in ['Lekki','Ikeja','Yaba','Surulere','Ajah','Victoria Island','Ikoyi'] %}<option>{{ l }}</option>{% endfor %}</select></label>
+      <label class="lbl">Bedrooms<select id="f-beds" class="inp"><option value="">Any</option><option>1</option><option>2</option><option>3</option><option value="4">4+</option></select></label>
+      <label class="lbl">Type<select id="f-type" class="inp"><option value="">All types</option>{% for t in ['Self-Contain','Flat','Duplex','Bungalow'] %}<option>{{ t }}</option>{% endfor %}</select></label>
+      <label class="lbl">Max price: <b id="f-price-label" class="text-brand"></b><input id="f-price" type="range" class="w-full accent-brand mt-3"></label>
+    </div>
+  </div>
+  <div>
+    <div class="flex items-center justify-between gap-3 mb-5 flex-wrap">
+      <div class="flex bg-soft rounded-2xl p-1 text-sm font-bold" role="tablist">
+        <button data-mode="stay" class="mode-tab"><i data-lucide="calendar" class="w-4 h-4"></i>Stay</button>
+        <button data-mode="rent" class="mode-tab"><i data-lucide="key-round" class="w-4 h-4"></i>Rent</button>
+        <button data-mode="buy" class="mode-tab"><i data-lucide="building-2" class="w-4 h-4"></i>Buy</button>
+      </div>
+      <div class="flex items-center gap-3 text-sm"><span id="count" class="text-slate-500 font-medium"></span>
+        <select id="f-sort" class="inp !w-auto !py-2"><option value="rec">Recommended</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></div>
+    </div>
+    <div id="plan" class="hidden mb-5"></div>
+    <div id="grid" class="grid gap-6 sm:grid-cols-2 {{ 'xl:grid-cols-3' if side else 'lg:grid-cols-3 xl:grid-cols-4' }}"></div>
+    <div id="empty" class="hidden text-center py-20"><div class="w-16 h-16 rounded-full bg-soft grid place-items-center mx-auto"><i data-lucide="search" class="w-7 h-7 text-slate-400"></i></div><p class="font-bold text-lg mt-4">No homes match</p><p class="text-slate-500 mt-1">Try relaxing your filters or raising the price limit.</p><button id="reset" class="btn-primary mt-5">Reset filters</button></div>
+  </div>
+</div>

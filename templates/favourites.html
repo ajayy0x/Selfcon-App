@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Favourites | SelfCon{% endblock %}
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 pt-10"><h1 class="text-3xl font-extrabold mb-6">Your favourites</h1>
+<div id="grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"></div>
+<div id="empty" class="hidden text-center py-20"><div class="w-16 h-16 rounded-full bg-soft grid place-items-center mx-auto"><i data-lucide="heart" class="w-7 h-7 text-slate-400"></i></div><p class="font-bold text-lg mt-4">Nothing saved yet</p><p class="text-slate-500 mt-1">Tap the heart on any home to keep it here.</p><a href="/search" class="btn-primary mt-5 inline-flex">Browse homes</a></div></div>
+{% endblock %}
